@@ -103,7 +103,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2 text-muted-foreground">
-            <span>© 2024 Charan Kumar. Made with</span>
+            <span>© 2025 Charan Kumar. Made with</span>
             <Heart className="w-4 h-4 text-red-500 animate-pulse" />
             <span>and React</span>
           </div>
