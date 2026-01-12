@@ -1,53 +1,79 @@
 
+# 🌐 Personal Portfolio Website
 
-## Project info
+A modern, responsive personal portfolio website built to showcase my projects, skills, and YouTube educational content.  
+The website includes smooth scrolling navigation, mobile-friendly sidebar menu, and dedicated sections for multiple YouTube channels.
 
-## How can I edit this contibute?
+🔗 **Live Project:** _(Add deployment link if available)_  
+🔗 **GitHub Repo:** https://github.com/ethyne2666/ethyne2666-2nd-year-profile-website
 
-Make a fork of this to your local machine.
+---
 
-After making changes make a pull request(PR).
+## ✨ Features
 
+- 📱 **Responsive Design** (Mobile, Tablet, Desktop)
+- 🍔 **Hamburger Menu with Sidebar Navigation**
+- 🎯 **Smooth Scroll to Sections**
+- 📌 **Nested Navbar Links (YouTube → Channels)**
+- 🎥 **Multiple YouTube Channel Sections**
+  - NullLogic
+  - Bits & Facts
+- 🧩 **Reusable Component-Based Architecture**
+- 🎨 **Modern UI with Animations & Hover Effects**
+- ⚡ **Fast performance using Vite**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🧱 Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Frontend:** React + TypeScript
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **UI Components:** ShadCN UI
+- **Build Tool:** Vite
+- **Version Control:** Git & GitHub
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🗂️ Project Structure
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```txt
+src/
+├── assets/
+├── components/
+│   ├── ui/
+│   ├── Navbar.tsx
+│   ├── HeroSection.tsx
+│   ├── AboutSection.tsx
+│   ├── ProjectsSection.tsx
+│   ├── YouTubeSection.tsx
+│   ├── TechStackSection.tsx
+│   └── Footer.tsx
+├── hooks/
+├── lib/
+│   ├── navItems.ts
+│   └── utils.ts
+├── pages/
+│   ├── Index.tsx
+│   └── NotFound.tsx
+├── App.tsx
+├── main.tsx
+└── index.css
 ```
+# Getting Started
+1️⃣### Clone the repository
+git clone https://github.com/ethyne2666/ethyne2666-2nd-year-profile-website.git
 
-**Edit a file directly in GitHub**
+2️⃣### Navigate into the project
+cd ethyne2666-2nd-year-profile-website
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3️⃣### Install dependencies
+npm install
 
-**Use GitHub Codespaces**
+4️⃣### Run the development server
+npm run dev
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
+The app will be available at:
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
+http://localhost:5173
