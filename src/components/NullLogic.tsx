@@ -6,41 +6,41 @@ const YouTubeSection = () => {
   const videos = [
     {
       id: "1",
-      title: "Digital Electronics Fundamentals",
-      description: "Understanding the basics of digital circuits and logic gates",
-      thumbnail: "/uploads/f26b638d-f214-4c77-9b33-a79d25bf68c4.png",
+      title: "Core Java Fundamentals",
+      description: "Understanding the basics of core java programming concepts",
+      thumbnail: "/uploads/nullLogic logo.jpeg",
       duration: "15:30",
       views: "2.5K",
-      url: "https://youtube.com/@charankumar_2666"
+      url: "https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x"
     },
     {
       id: "2", 
-      title: "Flip-Flops Explained Simply",
-      description: "Breaking down sequential logic circuits and their applications",
-      thumbnail: "/uploads/f26b638d-f214-4c77-9b33-a79d25bf68c4.png",
+      title: "Docker Explained Simply",
+      description: "Breaking down in detail explore more in the video",
+      thumbnail: "/uploads/nullLogic logo.jpeg",
       duration: "12:45",
       views: "1.8K",
-      url: "https://youtube.com/@charankumar_2666"
+      url: "https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x"
     },
     {
       id: "3",
-      title: "K-Maps Made Easy",
-      description: "Simplifying Boolean expressions using Karnaugh Maps",
-      thumbnail: "/uploads/f26b638d-f214-4c77-9b33-a79d25bf68c4.png",
+      title: "Git and Git hub Made Easy",
+      description: "Git and git hub explained in detail",
+      thumbnail: "/uploads/nullLogic logo.jpeg",
       duration: "18:20",
       views: "3.1K",
-      url: "https://youtube.com/@charankumar_2666"
+      url: "https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x"
     }
   ];
 
   return (
-    <section id="bitsfacts" className="py-20 px-6 bg-gradient-card">
+    <section id="nulllogic" className="py-20 px-6 bg-gradient-card">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center space-x-4 mb-4">
             <Youtube className="w-12 h-12 text-red-500" />
             <h2 className="text-4xl md:text-5xl font-bold text-electric">
-              Bits&Facts Channel
+              NullLogic Channel
             </h2>
           </div>
           <div className="h-1 w-24 bg-gradient-electric mx-auto rounded-full animate-glow-pulse"></div>
@@ -56,11 +56,11 @@ const YouTubeSection = () => {
             <div className="text-muted-foreground">Educational Videos</div>
           </Card>
           <Card className="card-glow text-center p-6 hover:scale-105 transition-all duration-300">
-            <div className="text-3xl font-bold text-electric mb-2">10K+</div>
+            <div className="text-3xl font-bold text-electric mb-2">1K+</div>
             <div className="text-muted-foreground">Total Views</div>
           </Card>
           <Card className="card-glow text-center p-6 hover:scale-105 transition-all duration-300">
-            <div className="text-3xl font-bold text-electric mb-2">500+</div>
+            <div className="text-3xl font-bold text-electric mb-2">50+</div>
             <div className="text-muted-foreground">Subscribers</div>
           </Card>
         </div>
@@ -116,7 +116,7 @@ const YouTubeSection = () => {
             Join the Learning Community
           </h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Subscribe to Bits&Facts for weekly content on Digital Electronics, 
+            Subscribe to NullLogic for weekly content on Programming,tech, Software Development, and Computer Science concepts explained in simple terms.
             Programming, and Engineering concepts explained in simple terms.
           </p>
           
@@ -124,7 +124,7 @@ const YouTubeSection = () => {
             <Button 
               variant="electric" 
               size="lg"
-              onClick={() => window.open('https://youtube.com/@charankumar_2666?si=98JIdHfgo1Eb0yBU', '_blank')}
+              onClick={() => window.open('https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x', '_blank')}
               className="group"
             >
               <Youtube className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
@@ -134,7 +134,7 @@ const YouTubeSection = () => {
             <Button 
               variant="outline-electric" 
               size="lg"
-              onClick={() => window.open('https://youtube.com/@charankumar_2666?si=98JIdHfgo1Eb0yBU', '_blank')}
+              onClick={() => window.open('https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x', '_blank')}
               className="group"
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />

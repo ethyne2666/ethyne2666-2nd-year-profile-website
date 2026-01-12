@@ -56,7 +56,7 @@ const HeroSection = () => {
             <Button 
               variant="electric" 
               size="lg" 
-              onClick={() => window.open('https://drive.google.com/file/d/1VdyC4Tid6lu5h2BLuHunQwZ69ZeIsWq2/view?usp=sharing', '_blank')}
+              onClick={() => window.open('https://drive.google.com/file/d/1EpYVVI4ovILdJ30Jq_ZlPbfA0ibK6dvp/view?usp=sharing', '_blank')}
               className="group"
             >
               <FileText className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
@@ -76,7 +76,7 @@ const HeroSection = () => {
             <Button 
               variant="outline-electric" 
               size="lg"
-              onClick={() => window.open('https://youtube.com/@charankumar_2666', '_blank')}
+              onClick={() => window.open('https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x', '_blank')}
               className="group"
             >
               <Youtube className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />

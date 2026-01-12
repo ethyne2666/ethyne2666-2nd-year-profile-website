@@ -6,6 +6,8 @@ import ProjectsSection from "@/components/ProjectsSection";
 import YouTubeSection from "@/components/YouTubeSection";
 import SocialLinks from "@/components/SocialLinks";
 import Footer from "@/components/Footer";
+import NullLogic from "@/components/NullLogic";
+import Navbar from "@/components/Navbar";
 
 const Index = () => {
   useEffect(() => {
@@ -37,11 +39,13 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-primary">
+    <div className="min-h-screen bg-gradient-primary pt-16">
+      <Navbar /> 
       <HeroSection />
       <AboutSection />
       <TechStackSection />
       <ProjectsSection />
+      <NullLogic />
       <YouTubeSection />
       <SocialLinks />
       <Footer />
