@@ -2,9 +2,10 @@
 # 🌐 Personal Portfolio Website
 
 A modern, responsive personal portfolio website built to showcase my projects, skills, and YouTube educational content.  
-The website includes smooth scrolling navigation, mobile-friendly sidebar menu, and dedicated sections for multiple YouTube channels.
+The website includes smooth scrolling navigation, a mobile-friendly sidebar menu, and dedicated sections for multiple YouTube channels.
 
 🔗 **Live Project:** https://ethyne2666-2nd-year-profile-website-iqgppet64.vercel.app/ 
+
 🔗 **GitHub Repo:** https://github.com/ethyne2666/ethyne2666-2nd-year-profile-website
 
 ---
