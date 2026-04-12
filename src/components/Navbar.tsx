@@ -1,9 +1,10 @@
-
 import { useState } from "react";
 import { navItems } from "../lib/navItems";
+import Terminal from "./Terminal";          // ← NEW  (line 3)
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [termOpen, setTermOpen] = useState(false);   // ← NEW  (line 7)
 
   const handleScroll = (href: string) => {
     setOpen(false);
@@ -19,14 +20,36 @@ const Navbar = () => {
       <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between p-4 bg-black/40 backdrop-blur">
         <h1 className="text-white text-lg font-semibold">CHARAN</h1>
 
-        {/* Hamburger */}
-        <button
-          onClick={() => setOpen(true)}
-          className="text-white text-2xl"
-        >
-          ☰
-        </button>
+        {/* ── RIGHT SIDE BUTTONS ────────────────────────────── */}
+        <div className="flex items-center gap-3">           {/* ← NEW wrapper (line 24) */}
+
+          {/* Terminal button  ← NEW (lines 26-38) */}
+          <button
+            onClick={() => setTermOpen(true)}
+            title="Open Terminal"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-mono
+                       transition-all duration-200
+                       text-green-400 border border-green-400/30
+                       hover:bg-green-400/10 hover:border-green-400/60 hover:shadow-[0_0_12px_rgba(0,255,65,0.25)]"
+          >
+            <span className="text-base leading-none">&gt;_</span>
+            <span className="hidden sm:inline text-xs tracking-wider">terminal</span>
+          </button>
+
+          {/* Hamburger (unchanged) */}
+          <button
+            onClick={() => setOpen(true)}
+            className="text-white text-2xl"
+          >
+            ☰
+          </button>
+
+        </div>
+        {/* ── END RIGHT SIDE ────────────────────────────────── */}
       </header>
+
+      {/* Terminal overlay  ← NEW (lines 50-52) */}
+      {termOpen && <Terminal onClose={() => setTermOpen(false)} />}
 
       {/* Sidebar overlay */}
       {open && (
@@ -80,7 +103,7 @@ const Navbar = () => {
             </div>
           ))}
         </nav>
-        
+
       </aside>
     </>
   );
