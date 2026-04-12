@@ -1,8 +1,5 @@
 import { ChevronDown, FileText, Code } from "lucide-react";
 
-/* Blue  : #38bdf8  (sky-400)   — Web Developer colour  */
-/* Green : #10b981  (emerald-500) — DevOps colour        */
-
 const HeroSection = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -28,8 +25,9 @@ const HeroSection = () => {
 
         {/* ── BIG NAME TOP — "CHARAN" ── */}
         <h1
-          className="text-[18vw] md:text-[16vw] font-black leading-none tracking-tight select-none text-center"
+          className="font-black leading-none tracking-tight select-none text-center"
           style={{
+            fontSize: "clamp(3.5rem, 18vw, 14rem)",
             color: "white",
             WebkitTextStroke: "2px rgba(255,255,255,0.12)",
             textShadow: "4px 4px 0px #38bdf8, 8px 8px 0px rgba(56,189,248,0.18)",
@@ -38,11 +36,13 @@ const HeroSection = () => {
           CHARAN
         </h1>
 
-        {/* ── MIDDLE ROW — photo left + Pacifico subtitle right ── */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 -mt-4 md:-mt-6 relative z-20">
-
-          {/* Profile photo — blue + green dual ring */}
-          <div className="relative flex-shrink-0" style={{ width: "fit-content" }}>
+        {/* ── MIDDLE ROW — photo + subtitle ── */}
+        <div
+          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 relative z-20"
+          style={{ marginTop: "clamp(-12px, -2vw, -24px)" }}
+        >
+          {/* Profile photo */}
+          <div className="relative flex-shrink-0">
             <div
               style={{
                 background: "conic-gradient(from 0deg, #38bdf8 0%, #38bdf8 50%, #10b981 50%, #10b981 100%)",
@@ -62,36 +62,56 @@ const HeroSection = () => {
                 <img
                   src="https://res.cloudinary.com/dyblpfzvz/image/upload/v1759581921/WhatsApp_Image_2025-05-05_at_23.42.22_9bee3e5b_jg8evd.jpg"
                   alt="Charan Kumar"
-                  className="w-28 h-28 md:w-36 md:h-36 object-cover rounded-full block"
+                  className="object-cover rounded-full block"
+                  style={{
+                    width: "clamp(90px, 22vw, 144px)",
+                    height: "clamp(90px, 22vw, 144px)",
+                  }}
                 />
               </div>
             </div>
           </div>
 
-          {/* Pacifico cursive subtitle */}
+          {/* Subtitle block */}
           <div className="text-center md:text-left">
+            {/* Role line — Pacifico */}
             <p
-              className="text-2xl md:text-4xl"
-              style={{ fontFamily: '"Pacifico", cursive', fontWeight: 300 }}
+              className="pacifico-regular"
+              style={{
+                fontSize: "clamp(1.3rem, 5vw, 2.6rem)",
+                lineHeight: 1.25,
+              }}
             >
               <span style={{ color: "white" }}>Web </span>
               <span style={{ color: "#38bdf8" }}>Developer</span>
               <span style={{ color: "white" }}> and </span>
               <span style={{ color: "#10b981" }}>DevOps</span>
             </p>
+
+            {/* Sub-caption — HIDDEN on mobile, visible md+ */}
             <p
-              className="text-xs md:text-sm mt-2 font-mono tracking-widest uppercase"
+              className="hidden md:block text-xs mt-2 font-mono tracking-widest uppercase"
               style={{ color: "rgba(255,255,255,0.32)" }}
             >
-              ECE Student · Full-Stack · Cloud & Infra
+              ECE Student · Full-Stack · Cloud &amp; Infra
+            </p>
+
+            {/* Mobile-only short caption — cleaner, no ECE clutter */}
+            <p
+              className="block md:hidden text-xs mt-1.5 font-mono tracking-wider"
+              style={{ color: "rgba(255,255,255,0.28)" }}
+            >
+              Full-Stack · Cloud &amp; Infra
             </p>
           </div>
         </div>
 
         {/* ── BIG NAME BOTTOM — "KUMAR" ── */}
         <h1
-          className="text-[18vw] md:text-[16vw] font-black leading-none tracking-tight select-none text-center -mt-4 md:-mt-6"
+          className="font-black leading-none tracking-tight select-none text-center"
           style={{
+            fontSize: "clamp(3.5rem, 18vw, 14rem)",
+            marginTop: "clamp(-12px, -2vw, -24px)",
             color: "white",
             WebkitTextStroke: "2px rgba(255,255,255,0.12)",
             textShadow: "-4px 4px 0px #10b981, -8px 8px 0px rgba(16,185,129,0.18)",
@@ -100,10 +120,13 @@ const HeroSection = () => {
           KUMAR
         </h1>
 
-        {/* ── Bio paragraph — blue & green highlights, no pink/purple ── */}
+        {/* ── Bio paragraph ── */}
         <p
-          className="mt-6 max-w-xl text-center text-base md:text-lg leading-relaxed"
-          style={{ color: "rgba(255,255,255,0.52)" }}
+          className="mt-4 md:mt-6 max-w-xl text-center leading-relaxed px-2"
+          style={{
+            color: "rgba(255,255,255,0.52)",
+            fontSize: "clamp(0.85rem, 2.5vw, 1.1rem)",
+          }}
         >
           I craft{" "}
           <span
@@ -132,8 +155,8 @@ const HeroSection = () => {
           workflows: Docker, CI/CD pipelines, cloud deployments, and automated infra that just works.
         </p>
 
-        {/* ── CTA Buttons — only two ── */}
-        <div className="flex flex-wrap justify-center gap-4 mt-8">
+        {/* ── CTA Buttons ── */}
+        <div className="flex flex-wrap justify-center gap-3 mt-6 md:mt-8">
           <button
             onClick={() =>
               window.open(
@@ -141,30 +164,33 @@ const HeroSection = () => {
                 "_blank"
               )
             }
-            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold
+            className="flex items-center gap-2 rounded-full font-semibold
                        transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-white/5"
             style={{
+              padding: "clamp(8px,2vw,12px) clamp(16px,4vw,24px)",
+              fontSize: "clamp(0.75rem, 2vw, 0.875rem)",
               border: "2px solid #38bdf8",
               color: "#38bdf8",
               background: "transparent",
             }}
           >
-            <FileText className="w-4 h-4" />
+            <FileText className="w-4 h-4 flex-shrink-0" />
             View Resume
           </button>
 
           <button
             onClick={() => scrollToSection("projects")}
-            className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold
+            className="flex items-center gap-2 rounded-full font-bold
                        transition-all duration-200 hover:scale-105 active:scale-95 hover:opacity-90"
             style={{
+              padding: "clamp(8px,2vw,12px) clamp(16px,4vw,24px)",
+              fontSize: "clamp(0.75rem, 2vw, 0.875rem)",
               background: "#10b981",
               color: "#000",
               border: "2px solid #10b981",
-              fontWeight: 700,
             }}
           >
-            <Code className="w-4 h-4" />
+            <Code className="w-4 h-4 flex-shrink-0" />
             My Projects
           </button>
         </div>
@@ -172,7 +198,7 @@ const HeroSection = () => {
         {/* Scroll hint */}
         <button
           onClick={() => scrollToSection("about")}
-          className="mt-12 flex flex-col items-center gap-1"
+          className="mt-8 md:mt-12 flex flex-col items-center gap-1"
         >
           <span
             className="text-xs font-mono tracking-widest uppercase"

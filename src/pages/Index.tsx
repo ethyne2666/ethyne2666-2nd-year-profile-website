@@ -8,11 +8,13 @@ import SocialLinks from "@/components/SocialLinks";
 import Footer from "@/components/Footer";
 import NullLogic from "@/components/NullLogic";
 import Navbar from "@/components/Navbar";
+import TechBubbles from "@/components/TechBubbles";
+import RobotSection from "@/components/RobotSection";
 
 const Index = () => {
   useEffect(() => {
     // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
+    //document.documentElement.style.scrollBehavior = 'smooth';
     
     // Intersection Observer for fade-in animations
     const observerOptions = {
@@ -43,10 +45,12 @@ const Index = () => {
       <Navbar /> 
       <HeroSection />
       <AboutSection />
+      <TechBubbles />
       <TechStackSection />
       <ProjectsSection />
       <NullLogic />
       <YouTubeSection />
+      <RobotSection />
       <SocialLinks />
       <Footer />
     </div>
