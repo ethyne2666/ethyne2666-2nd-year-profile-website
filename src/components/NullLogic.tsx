@@ -1,145 +1,219 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Youtube, Play, Clock, Eye } from "lucide-react";
+import { ArrowUpRight, Play, Youtube } from "lucide-react";
 
-const YouTubeSection = () => {
-  const videos = [
-    {
-      id: "1",
-      title: "Core Java Fundamentals",
-      description: "Understanding the basics of core java programming concepts",
-      thumbnail: "/uploads/nullLogic logo.jpeg",
-      duration: "15:30",
-      views: "2.5K",
-      url: "https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x"
-    },
-    {
-      id: "2", 
-      title: "Docker Explained Simply",
-      description: "Breaking down in detail explore more in the video",
-      thumbnail: "/uploads/nullLogic logo.jpeg",
-      duration: "12:45",
-      views: "1.8K",
-      url: "https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x"
-    },
-    {
-      id: "3",
-      title: "Git and Git hub Made Easy",
-      description: "Git and git hub explained in detail",
-      thumbnail: "/uploads/nullLogic logo.jpeg",
-      duration: "18:20",
-      views: "3.1K",
-      url: "https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x"
-    }
-  ];
+const NULLLOGIC_CHANNEL =
+  "https://www.youtube.com/@charankumar-c1c";
 
+const BITSFACTS_CHANNEL =
+  "https://www.youtube.com/@charankumar_2666";
+
+const nullLogicTopics = [
+  {
+    title: "Core Java",
+    description:
+      "Programming fundamentals, explained with a focus on concepts that matter in computer science.",
+    search: "Core Java",
+    thumbnail: "/uploads/nullLogic logo.jpeg",
+  },
+  {
+    title: "Docker",
+    description:
+      "Learn the basics of containers and how Docker fits into modern software development.",
+    search: "Docker",
+    thumbnail: "/uploads/nullLogic logo.jpeg",
+  },
+  {
+    title: "Git & GitHub",
+    description:
+      "A practical introduction to version control, repositories, and collaborating with GitHub.",
+    search: "Git GitHub",
+    thumbnail: "/uploads/nullLogic logo.jpeg",
+  },
+];
+
+const bitsFactsTopics = [
+  {
+    title: "Digital Electronics",
+    description:
+      "Explore digital circuits, logic gates, and core electronics concepts.",
+    search: "Digital Electronics",
+  },
+  {
+    title: "Flip-Flops",
+    description:
+      "Understand sequential logic circuits and the role of flip-flops.",
+    search: "Flip Flops",
+  },
+  {
+    title: "Karnaugh Maps",
+    description:
+      "Learn how K-maps help simplify Boolean expressions and logic designs.",
+    search: "Karnaugh Maps",
+  },
+];
+
+const openYouTubeSearch = (channel: string, topic: string) => {
+  const url = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    `${channel} ${topic}`
+  )}`;
+
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
+const openExternalLink = (url: string) => {
+  window.open(url, "_blank", "noopener,noreferrer");
+};
+
+const NullLogic = () => {
   return (
-    <section id="nulllogic" className="py-20 px-6 bg-gradient-card">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center space-x-4 mb-4">
-            <Youtube className="w-12 h-12 text-red-500" />
-            <h2 className="text-4xl md:text-5xl font-bold text-electric">
-              NullLogic Channel
+    <section
+      id="nulllogic"
+      className="relative overflow-hidden bg-white px-5 py-20 text-neutral-950 sm:px-8 sm:py-24"
+    >
+      {/* Subtle monochrome grid */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+          maskImage:
+            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto max-w-6xl">
+        {/* NullLogic — primary channel */}
+        <div className="mb-20">
+          <header className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-neutral-600">
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-950" />
+              Computer science, made clearer
+            </div>
+
+            <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
+              <span className="text-neutral-400">Channel /</span> NullLogic
             </h2>
-          </div>
-          <div className="h-1 w-24 bg-gradient-electric mx-auto rounded-full animate-glow-pulse"></div>
-          <p className="text-lg text-muted-foreground mt-6 max-w-2xl mx-auto">
-            Educational content that makes complex engineering concepts accessible to everyone
-          </p>
-        </div>
 
-        {/* Channel Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <Card className="card-glow text-center p-6 hover:scale-105 transition-all duration-300">
-            <div className="text-3xl font-bold text-electric mb-2">50+</div>
-            <div className="text-muted-foreground">Educational Videos</div>
-          </Card>
-          <Card className="card-glow text-center p-6 hover:scale-105 transition-all duration-300">
-            <div className="text-3xl font-bold text-electric mb-2">1K+</div>
-            <div className="text-muted-foreground">Total Views</div>
-          </Card>
-          <Card className="card-glow text-center p-6 hover:scale-105 transition-all duration-300">
-            <div className="text-3xl font-bold text-electric mb-2">50+</div>
-            <div className="text-muted-foreground">Subscribers</div>
-          </Card>
-        </div>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-neutral-600 sm:text-base sm:leading-7">
+              NullLogic is my channel for computer science and software
+              development. Explore topics like Java, Docker, Git, and the
+              concepts behind building software.
+            </p>
 
-        {/* Featured Videos */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {videos.map((video, index) => (
-            <Card 
-              key={video.id}
-              className="card-glow overflow-hidden hover:scale-105 transition-all duration-300 group cursor-pointer"
-              onClick={() => window.open(video.url, '_blank')}
-              style={{ animationDelay: `${index * 0.1}s` }}
+            <button
+              type="button"
+              onClick={() => openExternalLink(NULLLOGIC_CHANNEL)}
+              className="mt-7 inline-flex items-center gap-2 rounded-lg bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-700"
             >
-              <div className="relative">
-                <img 
-                  src={video.thumbnail} 
-                  alt={video.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Play className="w-16 h-16 text-white" />
-                </div>
-                <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-sm flex items-center space-x-1">
-                  <Clock className="w-3 h-3" />
-                  <span>{video.duration}</span>
-                </div>
-              </div>
-              
-              <CardHeader>
-                <CardTitle className="line-clamp-2 group-hover:text-primary transition-colors">
-                  {video.title}
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent>
-                <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
-                  {video.description}
-                </p>
-                <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                  <div className="flex items-center space-x-1">
-                    <Eye className="w-4 h-4" />
-                    <span>{video.views} views</span>
+              <Youtube className="h-4 w-4" />
+              Visit NullLogic
+              <ArrowUpRight className="h-4 w-4" />
+            </button>
+          </header>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {nullLogicTopics.map((topic, index) => (
+              <article
+                key={topic.title}
+                className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_16px_50px_-38px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-neutral-300 hover:shadow-[0_22px_60px_-38px_rgba(0,0,0,0.4)]"
+              >
+                <button
+                  type="button"
+                  onClick={() =>
+                    openYouTubeSearch("NullLogic Charan Kumar", topic.search)
+                  }
+                  aria-label={`Search NullLogic for ${topic.title} videos`}
+                  className="block w-full text-left"
+                >
+                  <div className="relative aspect-video overflow-hidden bg-neutral-100">
+                    <img
+                      src={topic.thumbnail}
+                      alt="NullLogic channel"
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      onError={(event) => {
+                        event.currentTarget.style.display = "none";
+                      }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/25">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-neutral-950 opacity-90 shadow-lg transition group-hover:scale-110">
+                        <Play className="ml-0.5 h-5 w-5 fill-current" />
+                      </span>
+                    </div>
+                    <span className="absolute left-3 top-3 rounded-full border border-white/70 bg-white/90 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-neutral-700 backdrop-blur">
+                      NullLogic
+                    </span>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold tracking-tight">
+                      {topic.title}
+                    </h3>
+                    <p className="mt-2 min-h-[3rem] text-sm leading-6 text-neutral-600">
+                      {topic.description}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-neutral-800">
+                      Find videos on YouTube
+                      <ArrowUpRight className="h-4 w-4 text-neutral-400 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </div>
+                </button>
+              </article>
+            ))}
+          </div>
         </div>
 
-        {/* YouTube CTA */}
-        <div className="text-center">
-          <h3 className="text-2xl font-bold mb-4 text-primary">
-            Join the Learning Community
-          </h3>
-          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Subscribe to NullLogic for weekly content on Programming,tech, Software Development, and Computer Science concepts explained in simple terms.
-            Programming, and Engineering concepts explained in simple terms.
-          </p>
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button 
-              variant="electric" 
-              size="lg"
-              onClick={() => window.open('https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x', '_blank')}
-              className="group"
+        {/* Bits&Facts — secondary channel */}
+        <div className="border-t border-neutral-200 pt-12 sm:pt-16">
+          <header className="mx-auto mb-8 max-w-2xl text-center">
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-neutral-500">
+              Also on YouTube
+            </p>
+            <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Bits&amp;Facts
+            </h3>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-neutral-600">
+              Short, approachable lessons on digital electronics, including
+              flip-flops and Karnaugh maps.
+            </p>
+          </header>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {bitsFactsTopics.map((topic) => (
+              <button
+                key={topic.title}
+                type="button"
+                onClick={() =>
+                  openYouTubeSearch("Bits and Facts Charan Kumar", topic.search)
+                }
+                className="group rounded-xl border border-neutral-200 bg-white/80 p-4 text-left transition hover:border-neutral-400 hover:bg-white"
+              >
+                <span className="flex items-center justify-between gap-3">
+                  <span className="font-semibold text-neutral-900">
+                    {topic.title}
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-neutral-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </span>
+                <span className="mt-2 block text-sm leading-5 text-neutral-600">
+                  {topic.description}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-7 text-center">
+            <button
+              type="button"
+              onClick={() => openExternalLink(BITSFACTS_CHANNEL)}
+              className="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm font-medium text-neutral-800 transition hover:border-neutral-500 hover:bg-neutral-50"
             >
-              <Youtube className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Subscribe to Channel
-            </Button>
-            
-            <Button 
-              variant="outline-electric" 
-              size="lg"
-              onClick={() => window.open('https://youtube.com/@charankumar-c1c?si=C4wegALvV1Fd-e_x', '_blank')}
-              className="group"
-            >
-              <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-              Watch Latest Video
-            </Button>
+              <Youtube className="h-4 w-4" />
+              Visit Bits&amp;Facts
+              <ArrowUpRight className="h-4 w-4 text-neutral-400" />
+            </button>
           </div>
         </div>
       </div>
@@ -147,4 +221,4 @@ const YouTubeSection = () => {
   );
 };
 
-export default YouTubeSection;
+export default NullLogic;

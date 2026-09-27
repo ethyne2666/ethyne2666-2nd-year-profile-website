@@ -1,4 +1,4 @@
-import { ChevronDown, FileText, Code } from "lucide-react";
+import { FileText, Code } from "lucide-react";
 
 const HeroSection = () => {
   const scrollToSection = (sectionId: string) => {
@@ -9,208 +9,206 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black"
-      style={{
-        backgroundImage: "url('/bg.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="relative min-h-screen overflow-hidden bg-white text-neutral-950"
     >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/78" />
+      {/* Subtle grid and soft color accents */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px)
+          `,
+          backgroundSize: "34px 34px",
+          maskImage:
+            "radial-gradient(ellipse at center, black 35%, transparent 85%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, black 35%, transparent 85%)",
+        }}
+      />
 
-      {/* ── Main Content ── */}
-      <div className="relative z-10 w-full flex flex-col items-center px-4">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-emerald-200/30 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-sky-200/30 blur-3xl"
+      />
 
-        {/* ── BIG NAME TOP — "CHARAN" ── */}
-        <h1
-          className="font-black leading-none tracking-tight select-none text-center"
-          style={{
-            fontSize: "clamp(3.5rem, 18vw, 14rem)",
-            color: "white",
-            WebkitTextStroke: "2px rgba(255,255,255,0.12)",
-            textShadow: "4px 4px 0px #38bdf8, 8px 8px 0px rgba(56,189,248,0.18)",
-          }}
-        >
-          CHARAN
-        </h1>
+      {/* Decorative tech symbols */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 hidden overflow-hidden md:block"
+      >
+        <span className="absolute left-[7%] top-[19%] font-mono text-sm text-neutral-300/80">
+          {"</>"}
+        </span>
+        <span className="absolute left-[46%] top-[12%] font-mono text-xs text-emerald-600/40">
+          {"{ }"}
+        </span>
+        <span className="absolute right-[9%] top-[23%] font-mono text-xs text-sky-600/50">
+          API
+        </span>
+        <span className="absolute left-[8%] bottom-[23%] font-mono text-xs text-sky-600/40">
+          01
+        </span>
+        <span className="absolute right-[8%] bottom-[18%] font-mono text-sm text-emerald-600/50">
+          {"↗"}
+        </span>
+        <span className="absolute right-[44%] bottom-[11%] font-mono text-xs text-neutral-300">
+          {"[ deploy ]"}
+        </span>
 
-        {/* ── MIDDLE ROW — photo + subtitle ── */}
-        <div
-          className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 relative z-20"
-          style={{ marginTop: "clamp(-12px, -2vw, -24px)" }}
-        >
-          {/* Profile photo */}
-          <div className="relative flex-shrink-0">
-            <div
+        <span className="absolute left-[13%] top-[42%] h-2 w-2 rounded-full border border-emerald-400/70" />
+        <span className="absolute right-[13%] top-[58%] h-2 w-2 rounded-full bg-sky-400/50" />
+        <span className="absolute right-[28%] top-[14%] h-1.5 w-1.5 rounded-full bg-emerald-500/50" />
+      </div>
+
+      <div className="relative z-10 flex min-h-screen flex-col lg:flex-row">
+        {/* Left half: text content */}
+        <div className="order-2 flex w-full items-center px-6 py-12 md:px-12 lg:order-1 lg:w-1/2 lg:py-20">
+          <div className="mx-auto flex max-w-xl flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left">
+            {/* Headline */}
+            <h1
+              className="font-black leading-[1.05] tracking-tight"
               style={{
-                background: "conic-gradient(from 0deg, #38bdf8 0%, #38bdf8 50%, #10b981 50%, #10b981 100%)",
-                borderRadius: "50%",
-                padding: "4px",
-                display: "inline-block",
+                fontSize: "clamp(2.25rem, 5vw, 3.75rem)",
+                color: "#0a0a0a",
+                fontFamily: "'Inter', 'SF Pro Display', system-ui, sans-serif",
               }}
             >
-              <div
-                style={{
-                  background: "black",
-                  borderRadius: "50%",
-                  padding: "3px",
-                  display: "inline-block",
-                }}
+              Charan Kumar
+              <br />
+              builds{" "}
+              <span
+                className="decoration-emerald-400 decoration-[5px] underline underline-offset-[7px]"
+                style={{ fontStyle: "italic" }}
               >
-                <img
-                  src="https://res.cloudinary.com/dyblpfzvz/image/upload/v1759581921/WhatsApp_Image_2025-05-05_at_23.42.22_9bee3e5b_jg8evd.jpg"
-                  alt="Charan Kumar"
-                  className="object-cover rounded-full block"
-                  style={{
-                    width: "clamp(90px, 22vw, 144px)",
-                    height: "clamp(90px, 22vw, 144px)",
-                  }}
-                />
-              </div>
+                full-stack
+              </span>{" "}
+              products
+            </h1>
+
+            {/* Role line */}
+            <p
+              className="mt-4 tracking-tight"
+              style={{
+                fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
+                lineHeight: 1.3,
+                color: "#0a0a0a",
+                fontFamily: "'Inter', system-ui, sans-serif",
+              }}
+            >
+              <span className="font-bold">Spring Boot</span>
+              {" · "}
+              <span className="italic">MERN Stack</span>
+              {" · "}
+              <span className="font-bold">DevOps</span>
+            </p>
+
+            {/* Bio */}
+            <p
+              className="mt-5 max-w-lg leading-relaxed"
+              style={{ color: "#525252", fontSize: "1rem" }}
+            >
+              I build dependable web applications from the interface to the
+              infrastructure—using{" "}
+              <span className="font-bold text-neutral-950 underline decoration-emerald-400 decoration-2 underline-offset-4">
+                Spring Boot and the MERN stack
+              </span>{" "}
+              to create full-stack experiences, and{" "}
+              <span className="font-semibold italic text-neutral-950">
+                DevOps
+              </span>{" "}
+              to automate delivery with Docker, CI/CD, and cloud deployments.
+            </p>
+
+            {/* CTA buttons */}
+            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+              <button
+                type="button"
+                onClick={() =>
+                  window.open(
+                    "https://drive.google.com/file/d/1JnynU7mL9Er2wz8NPjf_l_KkAVdXjGQj/view?usp=sharing",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
+                className="flex items-center gap-2 rounded-full border-2 border-neutral-950 bg-white/70 px-6 py-3 text-sm font-semibold text-neutral-950 transition-all duration-200 hover:scale-105 hover:bg-neutral-950 hover:text-white active:scale-95"
+              >
+                <FileText className="h-4 w-4 flex-shrink-0" />
+                View Resume
+              </button>
+
+              <button
+                type="button"
+                onClick={() => scrollToSection("projects")}
+                className="flex items-center gap-2 rounded-full border-2 border-neutral-950 bg-white/70 px-6 py-3 text-sm font-semibold text-neutral-950 transition-all duration-200 hover:scale-105 hover:bg-neutral-950 hover:text-white active:scale-95"
+              >
+                <Code className="h-4 w-4 flex-shrink-0" />
+                My Projects
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "/playground";
+                }}
+                className="flex items-center gap-2 rounded-full border-2 border-neutral-950 bg-white/70 px-6 py-3 text-sm font-semibold text-neutral-950 transition-all duration-200 hover:scale-105 hover:bg-emerald-400 hover:text-neutral-950 active:scale-95"
+              >
+                <Code className="h-4 w-4 flex-shrink-0" />
+                Playground
+              </button>
+            </div>
+
+            {/* Skill tags */}
+            <div className="mt-8 flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-2 border-t border-neutral-200/80 pt-6 lg:justify-start">
+              <span className="text-sm font-medium text-neutral-800">
+                Spring Boot · MERN Stack
+              </span>
+              <span
+                aria-hidden="true"
+                className="hidden h-4 w-px bg-neutral-300 sm:block"
+              />
+              <span className="text-sm font-medium text-neutral-800">
+                DevOps · Cloud · CI/CD
+              </span>
             </div>
           </div>
+        </div>
 
-          {/* Subtitle block */}
-          <div className="text-center md:text-left">
-            {/* Role line — Pacifico */}
-            <p
-              className="pacifico-regular"
-              style={{
-                fontSize: "clamp(1.3rem, 5vw, 2.6rem)",
-                lineHeight: 1.25,
-              }}
-            >
-              <span style={{ color: "white" }}>Web </span>
-              <span style={{ color: "#38bdf8" }}>Developer</span>
-              <span style={{ color: "white" }}> and </span>
-              <span style={{ color: "#10b981" }}>DevOps</span>
-            </p>
+        {/* Right half: profile photo */}
+        <div className="order-1 flex w-full items-center justify-center py-10 lg:order-2 lg:w-1/2 lg:py-20">
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-5 rounded-[1.75rem] border border-dashed border-emerald-300/70"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -inset-10 rounded-[2.25rem] border border-sky-200/70"
+            />
 
-            {/* Sub-caption — HIDDEN on mobile, visible md+ */}
-            <p
-              className="hidden md:block text-xs mt-2 font-mono tracking-widest uppercase"
-              style={{ color: "rgba(255,255,255,0.32)" }}
-            >
-              ECE Student · Full-Stack · Cloud &amp; Infra
-            </p>
+            <div className="relative h-[clamp(160px,40vw,340px)] w-[clamp(160px,40vw,340px)] overflow-hidden rounded-[1.25rem] border-[5px] border-neutral-950 bg-neutral-100 shadow-[0_25px_70px_-30px_rgba(15,23,42,0.35)]">
+              <img
+                src="https://res.cloudinary.com/debzdkdon/image/upload/v1790509455/charan_pstc1i.png"
+                alt="Charan Kumar"
+                className="block h-full w-full object-cover"
+              />
+            </div>
 
-            {/* Mobile-only short caption — cleaner, no ECE clutter */}
-            <p
-              className="block md:hidden text-xs mt-1.5 font-mono tracking-wider"
-              style={{ color: "rgba(255,255,255,0.28)" }}
-            >
-              Full-Stack · Cloud &amp; Infra
-            </p>
+            {/* Small decorative labels */}
+            <div className="absolute -left-8 top-8 hidden rounded-lg border border-neutral-200 bg-white/90 px-3 py-2 font-mono text-[10px] text-neutral-500 shadow-sm sm:block">
+              {"<developer />"}
+            </div>
+            <div className="absolute -bottom-5 -right-5 rounded-lg border border-neutral-200 bg-white/90 px-3 py-2 font-mono text-[10px] text-neutral-500 shadow-sm">
+              {"git push"}
+              <span className="ml-1 text-emerald-600">✓</span>
+            </div>
           </div>
         </div>
-
-        {/* ── BIG NAME BOTTOM — "KUMAR" ── */}
-        <h1
-          className="font-black leading-none tracking-tight select-none text-center"
-          style={{
-            fontSize: "clamp(3.5rem, 18vw, 14rem)",
-            marginTop: "clamp(-12px, -2vw, -24px)",
-            color: "white",
-            WebkitTextStroke: "2px rgba(255,255,255,0.12)",
-            textShadow: "-4px 4px 0px #10b981, -8px 8px 0px rgba(16,185,129,0.18)",
-          }}
-        >
-          KUMAR
-        </h1>
-
-        {/* ── Bio paragraph ── */}
-        <p
-          className="mt-4 md:mt-6 max-w-xl text-center leading-relaxed px-2"
-          style={{
-            color: "rgba(255,255,255,0.52)",
-            fontSize: "clamp(0.85rem, 2.5vw, 1.1rem)",
-          }}
-        >
-          I craft{" "}
-          <span
-            style={{
-              background: "#38bdf8",
-              color: "#000",
-              padding: "1px 8px",
-              borderRadius: "4px",
-              fontWeight: 600,
-            }}
-          >
-            web developer
-          </span>{" "}
-          experiences — from pixel-perfect UIs to rock-solid REST APIs — and ship them faster with{" "}
-          <span
-            style={{
-              background: "#10b981",
-              color: "#000",
-              padding: "1px 8px",
-              borderRadius: "4px",
-              fontWeight: 600,
-            }}
-          >
-            DevOps engineer
-          </span>{" "}
-          workflows: Docker, CI/CD pipelines, cloud deployments, and automated infra that just works.
-        </p>
-
-        {/* ── CTA Buttons ── */}
-        <div className="flex flex-wrap justify-center gap-3 mt-6 md:mt-8">
-          <button
-            onClick={() =>
-              window.open(
-                "https://drive.google.com/file/d/1JnynU7mL9Er2wz8NPjf_l_KkAVdXjGQj/view?usp=sharing",
-                "_blank"
-              )
-            }
-            className="flex items-center gap-2 rounded-full font-semibold
-                       transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-white/5"
-            style={{
-              padding: "clamp(8px,2vw,12px) clamp(16px,4vw,24px)",
-              fontSize: "clamp(0.75rem, 2vw, 0.875rem)",
-              border: "2px solid #38bdf8",
-              color: "#38bdf8",
-              background: "transparent",
-            }}
-          >
-            <FileText className="w-4 h-4 flex-shrink-0" />
-            View Resume
-          </button>
-
-          <button
-            onClick={() => scrollToSection("projects")}
-            className="flex items-center gap-2 rounded-full font-bold
-                       transition-all duration-200 hover:scale-105 active:scale-95 hover:opacity-90"
-            style={{
-              padding: "clamp(8px,2vw,12px) clamp(16px,4vw,24px)",
-              fontSize: "clamp(0.75rem, 2vw, 0.875rem)",
-              background: "#10b981",
-              color: "#000",
-              border: "2px solid #10b981",
-            }}
-          >
-            <Code className="w-4 h-4 flex-shrink-0" />
-            My Projects
-          </button>
-        </div>
-
-        {/* Scroll hint */}
-        <button
-          onClick={() => scrollToSection("about")}
-          className="mt-8 md:mt-12 flex flex-col items-center gap-1"
-        >
-          <span
-            className="text-xs font-mono tracking-widest uppercase"
-            style={{ color: "rgba(255,255,255,0.2)" }}
-          >
-            scroll
-          </span>
-          <ChevronDown
-            className="w-5 h-5 animate-bounce"
-            style={{ color: "#10b981" }}
-          />
-        </button>
       </div>
     </section>
   );

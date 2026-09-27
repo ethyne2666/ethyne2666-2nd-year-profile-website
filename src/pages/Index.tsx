@@ -3,13 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import TechStackSection from "@/components/TechStackSection";
 import ProjectsSection from "@/components/ProjectsSection";
-import YouTubeSection from "@/components/YouTubeSection";
 import SocialLinks from "@/components/SocialLinks";
 import Footer from "@/components/Footer";
 import NullLogic from "@/components/NullLogic";
 import Navbar from "@/components/Navbar";
-import TechBubbles from "@/components/TechBubbles";
-import RobotSection from "@/components/RobotSection";
 
 const Index = () => {
   useEffect(() => {
@@ -45,12 +42,9 @@ const Index = () => {
       <Navbar /> 
       <HeroSection />
       <AboutSection />
-      <TechBubbles />
       <TechStackSection />
       <ProjectsSection />
       <NullLogic />
-      <YouTubeSection />
-      <RobotSection />
       <SocialLinks />
       <Footer />
     </div>

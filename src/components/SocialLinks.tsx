@@ -1,124 +1,319 @@
-import { Linkedin, Github, Youtube, Mail, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import {
+  Linkedin,
+  Github,
+  Youtube,
+  Mail,
+  ArrowUpRight,
+  Send,
+  MessageCircle,
+  Copy,
+  Check,
+  X,
+  Code2,
+  Phone,
+} from "lucide-react";
+
+const EMAIL = "ece24123@iiitkalyani.ac.in";
+const phoneNumber = "6302968849";
+
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    description: "Professional network",
+    url: "https://www.linkedin.com/in/charan-kumar-ab5568311",
+    icon: Linkedin,
+  },
+  {
+    name: "GitHub",
+    description: "Code and projects",
+    url: "https://github.com/ethyne2666",
+    icon: Github,
+  },
+  {
+    name: "Leetcode",
+    description: "Learn and Compete",
+    url: "https://leetcode.com/u/RDpJ4imLKh/",
+    icon: Code2,
+  },
+  {
+    name: "X",
+    description: "Connect and Share",
+    url: "https://x.com/Charan_2666",
+    icon: X,
+  },
+  {
+    name: "YouTube",
+    description: "NullLogic and Bits&Facts",
+    url: "https://youtube.com/@charankumar_2666",
+    icon: Youtube,
+  },
+];
+
+const prompts = [
+  "I have a project idea",
+  "I'd like to discuss an opportunity",
+  "I have a question",
+];
 
 const SocialLinks = () => {
-  const socialLinks = [
-    {
-      name: "LinkedIn",
-      icon: <Linkedin className="w-6 h-6" />,
-      url: "https://www.linkedin.com/in/charan-kumar-ab5568311",
-      color: "hover:text-blue-500",
-      description: "Professional Network"
-    },
-    {
-      name: "GitHub", 
-      icon: <Github className="w-6 h-6" />,
-      url: "https://github.com/ethyne2666",
-      color: "hover:text-gray-400",
-      description: "Code Repository"
-    },
-    {
-      name: "YouTube",
-      icon: <Youtube className="w-6 h-6" />,
-      url: "https://youtube.com/@charankumar_2666",
-      color: "hover:text-red-500",
-      description: "Educational Content"
-    },
-    {
-      name: "Email",
-      icon: <Mail className="w-6 h-6" />,
-      url: "mailto:ece24123@iiitkalyani.ac.in",
-      color: "hover:text-green-500",
-      description: "Direct Contact"
+  const [message, setMessage] = useState("");
+  const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handlePromptClick = (prompt: string) => {
+    setSelectedPrompt(prompt);
+    setMessage((current) => current || `${prompt}. `);
+  };
+
+  const handleSendEmail = () => {
+    const subject = selectedPrompt || "Hello, Charan";
+    const body = message.trim() || "Hi Charan, ";
+
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
     }
-  ];
+  };
+
+
+  const handleCopyphoneNumber = async () => {
+    try {
+      await navigator.clipboard.writeText(phoneNumber);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `call:${phoneNumber}`;
+    }
+  };
 
   return (
-    <section id="social" className="py-20 px-6">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-electric">
-            Let's Connect
-          </h2>
-          <div className="h-1 w-24 bg-gradient-electric mx-auto rounded-full animate-glow-pulse"></div>
-          <p className="text-lg text-muted-foreground mt-6 max-w-2xl mx-auto">
-            Ready to collaborate? Let's build something amazing together
-          </p>
-        </div>
+    <section
+      id="social"
+      className="relative overflow-hidden bg-white px-5 py-20 text-neutral-950 sm:px-8 sm:py-24"
+    >
+      {/* Soft monochrome grid */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-40"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+          maskImage:
+            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+        }}
+      />
 
-        {/* Social Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          {socialLinks.map((link, index) => (
-            <div 
-              key={link.name}
-              className="group cursor-pointer"
-              onClick={() => window.open(link.url, '_blank')}
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="social-link mb-4 mx-auto">
-                {link.icon}
+      <div className="relative z-10 mx-auto max-w-6xl">
+        {/* Heading */}
+        <header className="mb-12 text-center sm:mb-16">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-neutral-500">
+            Start a conversation
+          </p>
+          <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
+            Let’s connect
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-neutral-600 sm:text-base">
+            Have a project, opportunity, or question? Send me a message or find
+            me on one of these platforms.
+          </p>
+          <div className="mx-auto mt-6 h-px w-16 bg-neutral-950" />
+        </header>
+
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+          {/* Chat-inspired contact panel */}
+          <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-[0_20px_70px_-45px_rgba(0,0,0,0.35)]">
+            <div className="flex items-center gap-3 border-b border-neutral-200 px-5 py-4 sm:px-6">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-950 text-white">
+                <MessageCircle className="h-5 w-5" />
               </div>
-              <div className="text-center">
-                <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                  {link.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {link.description}
+              <div>
+                <h3 className="text-sm font-semibold">Message Charan</h3>
+                <p className="mt-0.5 text-xs text-neutral-500">
+                  Choose a topic or write your own message
                 </p>
               </div>
+              <span className="ml-auto flex items-center gap-2 text-xs text-neutral-500">
+                <span className="h-2 w-2 rounded-full bg-neutral-900" />
+                Available for conversations
+              </span>
             </div>
-          ))}
-        </div>
 
-        {/* Contact CTA */}
-        <div className="text-center space-y-8">
-          <div className="bg-gradient-card p-8 rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-primary">
-              Open to Opportunities
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              I'm always excited to discuss new projects, innovative ideas, 
-              or opportunities to be part of your visions. Let's connect!
-            </p>
-            
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button 
-                variant="electric" 
-                size="lg"
-                onClick={() => window.open('mailto:ece24123@iiitkalyani.ac.in', '_blank')}
-                className="group"
-              >
-                <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Send Email
-              </Button>
-              
-              <Button 
-                variant="outline-electric" 
-                size="lg"
-                onClick={() => window.open('https://www.linkedin.com/in/charan-kumar-ab5568311', '_blank')}
-                className="group"
-              >
-                <ExternalLink className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                LinkedIn Message
-              </Button>
+            <div className="space-y-5 p-5 sm:p-6">
+              <div className="flex">
+                <div className="max-w-[90%] rounded-2xl rounded-tl-sm bg-neutral-100 px-4 py-3 text-sm leading-6 text-neutral-700">
+                  Hi! What would you like to talk about?
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {prompts.map((prompt) => {
+                  const isSelected = selectedPrompt === prompt;
+
+                  return (
+                    <button
+                      key={prompt}
+                      type="button"
+                      onClick={() => handlePromptClick(prompt)}
+                      className={`rounded-full border px-3 py-2 text-xs transition ${
+                        isSelected
+                          ? "border-neutral-950 bg-neutral-950 text-white"
+                          : "border-neutral-300 bg-white text-neutral-700 hover:border-neutral-500 hover:bg-neutral-50"
+                      }`}
+                    >
+                      {prompt}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <label htmlFor="contact-message" className="sr-only">
+                Your message
+              </label>
+              <textarea
+                id="contact-message"
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+                placeholder="Write a message..."
+                rows={5}
+                className="w-full resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm leading-6 text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200"
+              />
+
+              <div className="flex flex-col gap-3 border-t border-neutral-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs leading-5 text-neutral-500">
+                  This opens your email app with your message ready to send.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleSendEmail}
+                  className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-lg bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-700"
+                >
+                  <Send className="h-4 w-4" />
+                  Send email
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-electric mb-2">24/7</div>
-              <div className="text-muted-foreground">Response Time</div>
+          {/* Social links and direct email */}
+          <aside className="flex flex-col gap-5">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-5 sm:p-6">
+              <h3 className="text-lg font-semibold tracking-tight">
+                Find me elsewhere
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-neutral-600">
+                Explore my work, connect professionally, or watch my educational
+                content.
+              </p>
+
+              <div className="mt-5 space-y-2">
+                {socialLinks.map((link) => {
+                  const Icon = link.icon;
+
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-3 transition hover:border-neutral-200 hover:bg-neutral-50"
+                    >
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 bg-white text-neutral-800 transition group-hover:border-neutral-300">
+                        <Icon className="h-5 w-5" />
+                      </span>
+
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-medium text-neutral-900">
+                          {link.name}
+                        </span>
+                        <span className="mt-0.5 block text-xs text-neutral-500">
+                          {link.description}
+                        </span>
+                      </span>
+
+                      <ArrowUpRight className="h-4 w-4 text-neutral-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-neutral-900" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-electric mb-2">100%</div>
-              <div className="text-muted-foreground">Commitment</div>
+
+
+
+
+            <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:p-6">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-neutral-500">
+                Prefer email?
+              </p>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="mt-2 block break-all text-base font-semibold text-neutral-950 underline decoration-neutral-300 underline-offset-4 transition hover:decoration-neutral-900"
+              >
+                {EMAIL}
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-medium text-neutral-700 transition hover:border-neutral-500 hover:text-neutral-950"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    Copy email
+                  </>
+                )}
+              </button>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-electric mb-2">∞</div>
-              <div className="text-muted-foreground">Learning Spirit</div>
+
+
+
+
+             <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 sm:p-6">
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-neutral-500">
+                Prefer Mobile Number?
+              </p>
+              <a
+                href={`call/message:+91 ${phoneNumber}`}
+                className="mt-2 block break-all text-base font-semibold text-neutral-950 underline decoration-neutral-300 underline-offset-4 transition hover:decoration-neutral-900"
+              >
+                {phoneNumber}
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyphoneNumber}
+                className="mt-4 inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-medium text-neutral-700 transition hover:border-neutral-500 hover:text-neutral-950"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    Copy phoneNumber
+                  </>
+                )}
+              </button>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
