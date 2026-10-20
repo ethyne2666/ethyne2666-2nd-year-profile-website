@@ -8,7 +8,6 @@ import Lenis from "lenis";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import PlaygroundPage from "./lab/PlaygroundPage";
 import PageTransition from "./components/PageTransition";
 
 const queryClient = new QueryClient();
@@ -47,7 +46,6 @@ const App = () => {
           <PageTransition>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/playground" element={<PlaygroundPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </PageTransition>
