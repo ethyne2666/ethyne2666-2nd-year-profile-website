@@ -68,9 +68,11 @@ const Footer = () => {
               }}
               className="inline-flex items-center gap-2 text-lg font-bold tracking-tight"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-950 text-white">
-                <Code2 className="h-5 w-5" />
-              </span>
+              <img
+                src="https://res.cloudinary.com/debzdkdon/image/upload/v1792507308/ethyne_logo_izgxxm.png"
+                alt="Charan logo"
+                className="h-9 w-9 rounded-lg object-cover"
+              />
               Charan Kumar
             </a>
 

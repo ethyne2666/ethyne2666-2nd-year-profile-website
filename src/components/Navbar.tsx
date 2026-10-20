@@ -62,9 +62,11 @@ const Navbar = () => {
             }}
             className="flex flex-shrink-0 items-center gap-2"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-neutral-950 text-white">
-              <Code2 className="h-5 w-5" />
-            </span>
+            <img
+              src="https://res.cloudinary.com/debzdkdon/image/upload/v1792507308/ethyne_logo_izgxxm.png"
+              alt="Charan logo"
+              className="h-9 w-9 rounded-lg object-cover"
+            />
             <span className="text-sm font-bold tracking-[0.08em]">
               CHARAN
             </span>
@@ -173,9 +175,8 @@ const Navbar = () => {
       <aside
         id="mobile-navigation"
         aria-label="Mobile navigation"
-        className={`fixed right-0 top-16 z-50 h-[calc(100dvh-4rem)] w-full max-w-sm overflow-y-auto border-l border-neutral-200 bg-white p-5 shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed right-0 top-16 z-50 h-[calc(100dvh-4rem)] w-full max-w-sm overflow-y-auto border-l border-neutral-200 bg-white p-5 shadow-2xl transition-transform duration-300 ease-out lg:hidden ${open ? "translate-x-0" : "translate-x-full"
+          }`}
         aria-hidden={!open}
       >
         <div className="mb-5 border-b border-neutral-200 pb-4">

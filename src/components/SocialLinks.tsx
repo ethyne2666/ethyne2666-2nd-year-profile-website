@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import {
   Linkedin,
   Github,
@@ -12,10 +12,17 @@ import {
   X,
   Code2,
   Phone,
+  Loader2,
 } from "lucide-react";
 
 const EMAIL = "ece24123@iiitkalyani.ac.in";
 const phoneNumber = "6302968849";
+
+// Backend URL. Set VITE_API_BASE_URL in Vercel (e.g. https://your-backend.onrender.com).
+// While developing locally it falls back to the Spring Boot server on port 8080.
+const API_BASE_URL: string =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.DEV ? "http://localhost:8080" : "");
 
 const socialLinks = [
   {
@@ -56,9 +63,19 @@ const prompts = [
   "I have a question",
 ];
 
+type SubmitStatus = "idle" | "sending" | "success" | "error";
+
+const inputClasses =
+  "w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm leading-6 text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200 disabled:opacity-60";
+
 const SocialLinks = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot - humans never see or fill this
   const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [feedback, setFeedback] = useState("");
   const [copied, setCopied] = useState(false);
 
   const handlePromptClick = (prompt: string) => {
@@ -66,13 +83,47 @@ const SocialLinks = () => {
     setMessage((current) => current || `${prompt}. `);
   };
 
-  const handleSendEmail = () => {
-    const subject = selectedPrompt || "Hello, Charan";
-    const body = message.trim() || "Hi Charan, ";
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (status === "sending") return;
 
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    setStatus("sending");
+    setFeedback("");
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+          website,
+        }),
+      });
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok || !json?.success) {
+        throw new Error(json?.message || "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      setFeedback(json.data || "Message received. Thanks for reaching out!");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setSelectedPrompt(null);
+    } catch (error) {
+      setStatus("error");
+      setFeedback(
+        error instanceof TypeError
+          ? "Couldn't reach the server. Please try again in a moment, or email me directly."
+          : error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    }
   };
 
   const handleCopyEmail = async () => {
@@ -151,7 +202,7 @@ const SocialLinks = () => {
               </span>
             </div>
 
-            <div className="space-y-5 p-5 sm:p-6">
+            <form onSubmit={handleSubmit} className="space-y-5 p-5 sm:p-6">
               <div className="flex">
                 <div className="max-w-[90%] rounded-2xl rounded-tl-sm bg-neutral-100 px-4 py-3 text-sm leading-6 text-neutral-700">
                   Hi! What would you like to talk about?
@@ -179,6 +230,56 @@ const SocialLinks = () => {
                 })}
               </div>
 
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="contact-name" className="sr-only">
+                    Your name
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    placeholder="Your name"
+                    maxLength={100}
+                    required
+                    autoComplete="name"
+                    disabled={status === "sending"}
+                    className={inputClasses}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="sr-only">
+                    Your email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="Your email"
+                    maxLength={254}
+                    required
+                    autoComplete="email"
+                    disabled={status === "sending"}
+                    className={inputClasses}
+                  />
+                </div>
+              </div>
+
+              {/* Honeypot: hidden from people, bots tend to fill it in */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(event) => setWebsite(event.target.value)}
+                />
+              </div>
+
               <label htmlFor="contact-message" className="sr-only">
                 Your message
               </label>
@@ -188,23 +289,53 @@ const SocialLinks = () => {
                 onChange={(event) => setMessage(event.target.value)}
                 placeholder="Write a message..."
                 rows={5}
-                className="w-full resize-y rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm leading-6 text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-500 focus:ring-2 focus:ring-neutral-200"
+                maxLength={2000}
+                required
+                disabled={status === "sending"}
+                className={`${inputClasses} resize-y`}
               />
+
+              {feedback && (
+                <div
+                  role={status === "error" ? "alert" : "status"}
+                  className={`flex items-start gap-2 rounded-xl px-4 py-3 text-sm leading-6 ${
+                    status === "success"
+                      ? "bg-neutral-100 text-neutral-900"
+                      : "border border-neutral-950 text-neutral-950"
+                  }`}
+                >
+                  {status === "success" ? (
+                    <Check className="mt-1 h-4 w-4 flex-shrink-0" />
+                  ) : (
+                    <X className="mt-1 h-4 w-4 flex-shrink-0" />
+                  )}
+                  <span>{feedback}</span>
+                </div>
+              )}
 
               <div className="flex flex-col gap-3 border-t border-neutral-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs leading-5 text-neutral-500">
-                  This opens your email app with your message ready to send.
+                  Your message is sent straight to me. I'll reply by email.
                 </p>
                 <button
-                  type="button"
-                  onClick={handleSendEmail}
-                  className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-lg bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-700"
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-lg bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  <Send className="h-4 w-4" />
-                  Send email
+                  {status === "sending" ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Send message
+                    </>
+                  )}
                 </button>
               </div>
-            </div>
+            </form>
           </div>
 
           {/* Social links and direct email */}
