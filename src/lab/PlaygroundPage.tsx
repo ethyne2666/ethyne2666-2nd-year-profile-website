@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, KeyRound, Network } from "lucide-react";
 import JwtPlayground from "./jwt/JwtPlayground";
+import SystemDesignSection from "./systemdesign/SystemDesignSection";
 
 const TABS = [
   { id: "jwt", label: "JWT Auth", icon: KeyRound },
@@ -10,13 +11,17 @@ const TABS = [
 
 type TabId = (typeof TABS)[number]["id"];
 
-const UPCOMING = [
-  { title: "URL Shortener", text: "Paste a long link, watch the short code get generated and stored." },
-  { title: "Notification System", text: "Follow one notification through queue, workers and channels." },
-];
-
 const PlaygroundPage = () => {
-  const [tab, setTab] = useState<TabId>("jwt");
+  const [params, setParams] = useSearchParams();
+
+  // opening a shared link like /playground?design=url-shortener lands straight on the System Design tab
+  const [tab, setTab] = useState<TabId>(params.get("design") ? "design" : "jwt");
+
+  const changeTab = (id: TabId) => {
+    // leaving System Design: drop the open design from the URL so it doesn't reappear later
+    if (id === "jwt" && params.get("design")) setParams({});
+    setTab(id);
+  };
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-white text-neutral-950">
@@ -38,7 +43,7 @@ const PlaygroundPage = () => {
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-neutral-500">playground</p>
           <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">Poke the backend</h1>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-neutral-600 sm:text-base">
-            Real requests to my Spring Boot API. Click through, break things, and read the raw request and response.
+            Real requests to my Spring Boot API, plus interactive system design walkthroughs. Click through, break things, and read the raw request and response.
           </p>
           <div className="mx-auto mt-6 h-px w-16 bg-neutral-950" />
         </header>
@@ -50,7 +55,7 @@ const PlaygroundPage = () => {
                 key={id}
                 role="tab"
                 aria-selected={tab === id}
-                onClick={() => setTab(id)}
+                onClick={() => changeTab(id)}
                 className={`inline-flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs font-semibold transition sm:px-5 ${
                   tab === id ? "bg-neutral-950 text-white" : "text-neutral-600 hover:text-neutral-950"
                 }`}
@@ -61,19 +66,7 @@ const PlaygroundPage = () => {
           </div>
         </div>
 
-        {tab === "jwt" ? (
-          <JwtPlayground />
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2">
-            {UPCOMING.map((u) => (
-              <div key={u.title} className="rounded-2xl border border-dashed border-neutral-300 bg-white/70 p-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500">coming next</p>
-                <h3 className="mt-2 text-lg font-bold tracking-tight">{u.title}</h3>
-                <p className="mt-1 text-sm leading-6 text-neutral-600">{u.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
+        {tab === "jwt" ? <JwtPlayground /> : <SystemDesignSection />}
       </div>
     </main>
   );
